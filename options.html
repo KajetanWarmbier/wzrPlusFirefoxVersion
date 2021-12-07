@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WZR PLUS SETTINGS</title>
+    <script defer src="options.js"></script>
+    <link rel="stylesheet" href="options.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="content">
+            <form id="indexValueForm">
+                <label for="studiaRodzaj">Rodzaj studiów: </label>
+                <select id="studiaRodzaj" name="studiaRodzaj">
+                    <option id="selectStudiaRodzaj">Wybierz</option>
+                    <option id="stacjonarne">Stacjonarne</option>
+                    <option id="niestacjonarne">Niestacjonarne</option>
+                </select>
+
+                <label for="studiaStopien">Stopień studiów: </label>
+                <select id="studiaStopien" name="studiaStopien">
+                    <option id="selectStudiaStopien">Wybierz</option>
+                    <option id="stopien1">Pierwszy</option>
+                    <option id="stopien2">Drugi</option>
+                    <option id="stopien3">Trzeci</option>
+                </select>
+
+                <label for="groupIndex">Grupa: </label>
+                <select id="groupIndex" name="groupIndex">
+                    <!--There goes options.-->
+                </select>
+
+                <div id="indexContainer">
+                    <div class="tooltip">
+                        <img src="images/useIcons/indexInfoIcon.svg" alt="Index Info Icon" id="indexInfoIcon">
+                        <span class="tooltipText">Indeks nie jest wymagany.</span>
+                    </div>
+
+                    <label for="indexValue">Indeks: </label>
+                </div>
+
+                <input type="text" name="indexValue" id="indexValueId">
+                <button id="submitBtn">Zatwierdź</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="footer">
+        <span id="creator">Created by: Kajetan Warmbier</span>
+    </div>
+</body>
+
+</html>
