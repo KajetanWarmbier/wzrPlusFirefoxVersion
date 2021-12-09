@@ -135,7 +135,7 @@ function wypelnijGrupe() {
 };
 
 async function populateGroup(rodzajStudiow, stopienStudiow) {
-    const groupsListRes = await fetch('./groupsList.json');
+    const groupsListRes = await fetch('https://raw.githubusercontent.com/KajetanWarmbier/wzrPlus/main/groupsList.json');
     const groupsList = await groupsListRes.json();
     const toPopulateSelect = document.getElementById('groupIndex');
 
