@@ -5,6 +5,10 @@
                 {
                     "version": "1.1",
                     "update_link": "https://github.com/KajetanWarmbier/wzrPlusFirefoxVersion/raw/main/web-ext-artifacts/wzr_plus-1.1-fx.xpi"
+                },
+                {
+                    "version": "1.2",
+                    "update_link": "https://github.com/KajetanWarmbier/wzrPlusFirefoxVersion/raw/main/web-ext-artifacts/wzr_plus-1.2-fx.xpi"
                 }
             ]
         }
