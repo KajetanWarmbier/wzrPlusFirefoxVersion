@@ -1,16 +1,16 @@
 {
-    "addons": {
-        "{18080166-3053-4e06-96a0-e9dc147d28b4}": {
-            "updates": [
-                {
-                    "version": "1.1",
-                    "update_link": "https://github.com/KajetanWarmbier/wzrPlusFirefoxVersion/raw/main/web-ext-artifacts/wzr_plus-1.1-fx.xpi"
-                },
-                {
-                    "version": "1.2",
-                    "update_link": "https://github.com/KajetanWarmbier/wzrPlusFirefoxVersion/raw/main/web-ext-artifacts/wzr_plus-1.2-fx.xpi"
-                }
-            ]
+  "addons": {
+    "{18080166-3053-4e06-96a0-e9dc147d28b4}": {
+      "updates": [
+        {
+          "version": "1.1",
+          "update_link": "https://github.com/KajetanWarmbier/wzrPlusFirefoxVersion/raw/main/web-ext-artifacts/wzr_plus-1.1-fx.xpi"
+        },
+        {
+          "version": "1.2",
+          "update_link": "https://github.com/KajetanWarmbier/wzrPlusFirefoxVersion/raw/main/web-ext-artifacts/wzr_plus-1.2-fx.xpi"
         }
+      ]
     }
+  }
 }

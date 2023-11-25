@@ -1,169 +1,194 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener("DOMContentLoaded", () => {
+  async function fillInTheFIelds() {
+    await chrome.storage.sync.get(
+      ["typeOfStudies"],
+      function (typeOfStudiesValue) {
+        if (typeOfStudiesValue.typeOfStudies.length) {
+          document.querySelector('select[name="typeOfStudies"]').options[
+            typeOfStudiesValue.typeOfStudies
+          ].selected = true;
 
-    async function wypelnijPola() {
-        await chrome.storage.sync.get(['studiaRodzaj'], function (studiaRodzajValue) {
-            if (studiaRodzajValue.studiaRodzaj > 0) {
-                document.querySelector('select[name="studiaRodzaj"]').options[studiaRodzajValue.studiaRodzaj].selected = true;
+          chrome.storage.sync.get(["degree"], function (degreeValue) {
+            if (degreeValue.degree.length) {
+              document.querySelector('select[name="degree"]').options[
+                degreeValue.degree
+              ].selected = true;
 
-                chrome.storage.sync.get(['studiaStopien'], function (studiaStopienValue) {
-                    if (studiaStopienValue.studiaStopien > 0) {
-                        document.querySelector('select[name="studiaStopien"]').options[studiaStopienValue.studiaStopien].selected = true;
-
-                        if (studiaRodzajValue.studiaRodzaj === 1) {
-                            switch (studiaStopienValue.studiaStopien) {
-                                case 1:
-                                    populateGroup(1, 'stopien1');
-                                    break;
-                                case 2:
-                                    populateGroup(1, 'stopien2');
-                                    break;
-                                case 3:
-                                    populateGroup(1, 'stopien3');
-                                    break;
-                                    
-                            }
-                        } else if (studiaRodzajValue.studiaRodzaj === 2) {
-                            switch (studiaStopienValue.studiaStopien) {
-                                case 1:
-                                    populateGroup(2, 'stopien1');
-                                    break;
-                                case 2:
-                                    populateGroup(2, 'stopien2');
-                                    break;
-                                case 3:
-                                    populateGroup(2, 'stopien3');
-                                    break;
-                            }
-                        }
-
-                    } else {
-                        document.querySelector('select[name="groupIndex"]').disabled = true;
-                    }
-                });
-
+              if (typeOfStudiesValue.typeOfStudies === 1) {
+                switch (degreeValue.degree) {
+                  case 1:
+                    populateGroup(1, "firstDegree");
+                    break;
+                  case 2:
+                    populateGroup(1, "secondDegree");
+                    break;
+                  case 3:
+                    populateGroup(1, "thirdDegree");
+                    break;
+                }
+              } else if (typeOfStudiesValue.typeOfStudies === 2) {
+                switch (degreeValue.degree) {
+                  case 1:
+                    populateGroup(2, "firstDegree");
+                    break;
+                  case 2:
+                    populateGroup(2, "secondDegree");
+                    break;
+                  case 3:
+                    populateGroup(2, "thirdDegree");
+                    break;
+                }
+              }
             } else {
-                document.querySelector('select[name="studiaStopien"]').disabled = true;
+              document.querySelector(
+                'select[name="groupIndex"]'
+              ).disabled = true;
             }
-        });
-    };
-
-    wypelnijPola();
-
-    chrome.storage.sync.get(['index'], function (indValue) {
-        if (indValue.index > 0) {
-            document.querySelector("#indexValueId").value = indValue.index;
+          });
+        } else {
+          document.querySelector('select[name="degree"]').disabled = true;
         }
-    });
+      }
+    );
+  }
 
+  fillInTheFIelds();
+
+  chrome.storage.sync.get(["index"], function (indexValue) {
+    if (indexValue.index.length) {
+      document.querySelector("#indexValueId").value = indexValue.index;
+    }
+  });
 });
 
-
-document.querySelector('#submitBtn').addEventListener('click', initializeData);
-document.querySelector('#studiaRodzaj').addEventListener('change', studiaRodzajSelect);
-document.querySelector('#studiaStopien').addEventListener('change', studiaStopienSelect);
-document.querySelector('#creator').addEventListener('click', redirectToCreatorGithub);
+document.querySelector("#submitBtn").addEventListener("click", initializeData);
+document
+  .querySelector("#typeOfStudies")
+  .addEventListener("change", selectTypeOfStudies);
+document.querySelector("#degree").addEventListener("change", selectDegree);
+document
+  .querySelector("#creator")
+  .addEventListener("click", redirectToCreatorGithub);
 
 function initializeData() {
-    var indexField = document.querySelector('#indexValueId').value;
-    if (indexField === '' || indexField.match(/^\d+$/)) {
-        const indexValue = document.querySelector('#indexValueId').value;
-        chrome.storage.sync.set({index: indexValue});
+  const groupIndex = document.querySelector(
+    'select[name="groupIndex"]'
+  ).selectedIndex;
+  chrome.storage.sync.set({ groupIndex: groupIndex });
 
-        const groupIndex = document.querySelector('select[name="groupIndex"]').selectedIndex;
-        chrome.storage.sync.set({groupIndex: groupIndex});
+  const typeOfStudiesValue = document.querySelector(
+    'select[name="typeOfStudies"]'
+  ).selectedIndex;
+  chrome.storage.sync.set({ typeOfStudies: typeOfStudiesValue });
 
-        const studiaRodzajValue = document.querySelector('select[name="studiaRodzaj"]').selectedIndex;
-        chrome.storage.sync.set({studiaRodzaj: studiaRodzajValue});
+  const degreeValue = document.querySelector(
+    'select[name="degree"]'
+  ).selectedIndex;
+  chrome.storage.sync.set({ degree: degreeValue });
 
-        const studiaStopienValue = document.querySelector('select[name="studiaStopien"]').selectedIndex;
-        chrome.storage.sync.set({studiaStopien: studiaStopienValue});
+  if (indexField.length && indexField.match(/^\d+$/)) {
+    const indexValue = document.querySelector("#indexValueId").value;
+    chrome.storage.sync.set({ index: indexValue });
+  }
 
-        alert("Zapisano informacje.");
-    } else {
-        alert("Prawidłowy indeks powinien składać się wycznie z cyfr.");
+  alert("Zapisano informacje.");
+}
+
+function selectTypeOfStudies() {
+  document.querySelector('select[name="degree"]').options[0].selected = true;
+
+  selectDegree();
+
+  const typeOfStudiesIndex = document.querySelector(
+    'select[name="typeOfStudies"]'
+  ).selectedIndex;
+
+  if (typeOfStudiesIndex !== 0) {
+    document.querySelector('select[name="degree"]').disabled = false;
+  } else {
+    document.querySelector('select[name="degree"]').disabled = true;
+  }
+}
+
+async function selectDegree() {
+  document.getElementById("groupIndex").replaceChildren();
+
+  const degreeIndex = document.querySelector(
+    'select[name="degree"]'
+  ).selectedIndex;
+
+  const typeOfStudiesIndex = document.querySelector(
+    'select[name="typeOfStudies"]'
+  ).selectedIndex;
+
+  if (degreeIndex !== 0) {
+    document.querySelector('select[name="groupIndex"]').disabled = false;
+  } else {
+    document.querySelector('select[name="groupIndex"]').disabled = true;
+    document.querySelector('select[name="groupIndex"]').value = "Wybierz";
+  }
+
+  switch (degreeIndex) {
+    case 0:
+      break;
+    case 1:
+      populateGroup(typeOfStudiesIndex, "firstDegree");
+      break;
+    case 2:
+      populateGroup(typeOfStudiesIndex, "secondDegree");
+      break;
+    case 3:
+      populateGroup(typeOfStudiesIndex, "thirdDegree");
+      break;
+    default:
+      break;
+  }
+}
+
+function fillInGroup() {
+  chrome.storage.sync.get(["groupIndex"], function (groupValue) {
+    try {
+      document.querySelector('select[name="groupIndex"]').options[
+        groupValue.groupIndex
+      ].selected = true;
+    } catch (err) {
+      console.error(
+        "Nothing to worry about. Just a weird way to omit the error."
+      );
     }
-};
+  });
+}
 
-function studiaRodzajSelect() {
-    document.querySelector('select[name="studiaStopien"]').options[0].selected = true;
-    studiaStopienSelect();
+async function populateGroup(typeOfStudies, degree) {
+  const groupsList = await fetch(
+    "https://raw.githubusercontent.com/KajetanWarmbier/wzrPlus/main/groupsList.json"
+  ).then((groupsListRes) => {
+    return groupsListRes.json();
+  });
 
-    var rodzajStudiaIndex = document.querySelector('select[name="studiaRodzaj"]').selectedIndex;
-    if (rodzajStudiaIndex !== 0) {
-        document.querySelector('select[name="studiaStopien"]').disabled = false;
-    } else {
-        document.querySelector('select[name="studiaStopien"]').disabled = true;
+  const toPopulateSelect = document.getElementById("groupIndex");
+
+  if (typeOfStudies === 1) {
+    const group = groupsList.stacjonarne[degree];
+    const option = document.createElement("option");
+
+    for (let i = 0; i < group.length; i++) {
+      option.appendChild(document.createTextNode(group[i]));
+      toPopulateSelect.appendChild(option);
     }
-};
+  } else if (typeOfStudies === 2) {
+    const group = groupsList.niestacjonarne[degree];
+    const option = document.createElement("option");
 
-async function studiaStopienSelect() {
-    document.getElementById('groupIndex').replaceChildren();
-    var stopienIndex = document.querySelector('select[name="studiaStopien"]').selectedIndex;
-    var rodzajStudiaIndex = document.querySelector('select[name="studiaRodzaj"]').selectedIndex;
-
-    if (stopienIndex !== 0) {
-        document.querySelector('select[name="groupIndex"]').disabled = false;
-    } else {
-        document.querySelector('select[name="groupIndex"]').disabled = true;
-        document.querySelector('select[name="groupIndex"]').value = 'wybierz';
+    for (let i = 0; i < group.length; i++) {
+      option.appendChild(document.createTextNode(group[i]));
+      toPopulateSelect.appendChild(option);
     }
-    
-    switch (stopienIndex) {
-        case 0:
-            console.log("Nie wybrano stopnia studiow.");
-            break;
-        case 1:
-            populateGroup(rodzajStudiaIndex, 'stopien1');
-            break;
-        case 2:
-            populateGroup(rodzajStudiaIndex, 'stopien2');
-            break;
-        case 3:
-            populateGroup(rodzajStudiaIndex, 'stopien3');
-            break;
-    }
-};
+  }
 
-function wypelnijGrupe() {
-    chrome.storage.sync.get(['groupIndex'], function (grpValue) {
-        try {
-            document.querySelector('select[name="groupIndex"]').options[grpValue.groupIndex].selected = true;
-        } catch (err) {
-            console.log("Nothing to worry about. Just weird way to omit the error :)");
-        }
-    });
-};
-
-async function populateGroup(rodzajStudiow, stopienStudiow) {
-    const groupsListRes = await fetch('https://raw.githubusercontent.com/KajetanWarmbier/wzrPlus/main/groupsList.json');
-    const groupsList = await groupsListRes.json();
-    const toPopulateSelect = document.getElementById('groupIndex');
-
-    if (rodzajStudiow === 1) {
-        var group = groupsList.stacjonarne[stopienStudiow];
-        var option;
-
-        for (var i = 0; i < group.length; i++) {
-            option = document.createElement('option');
-            option.appendChild(document.createTextNode(group[i]));
-            toPopulateSelect.appendChild(option);
-        }
-
-    } else if (rodzajStudiow === 2) {
-        var group = groupsList.niestacjonarne[stopienStudiow];
-        var option;
-        for (var i = 0; i < group.length; i++) {
-            option = document.createElement('option');
-            option.appendChild(document.createTextNode(group[i]));
-            toPopulateSelect.appendChild(option);
-        }
-    } else {
-        console.log("Wybrano wybrano");
-    }
-
-    wypelnijGrupe();
-};
+  fillInGroup();
+}
 
 function redirectToCreatorGithub() {
-    chrome.tabs.create({"url": "https://github.com/KajetanWarmbier"});
+  chrome.tabs.create({ url: "https://github.com/KajetanWarmbier" });
 }

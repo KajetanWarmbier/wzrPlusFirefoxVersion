@@ -1,37 +1,42 @@
 {
-
-    "manifest_version": 2,
-    "name": "WZR Plus",
-    "description": "Uzyskaj wygodny dostęp do wszystkich stron i portali WZR dzięki WZR Plus.",
-    "version": "1.1",
-    "author": "Kajetan Warmbier",
-    "permissions": ["storage", "tabs", "https://wzr.ug.edu.pl/*", "https://mdl.ug.edu.pl/*", "https://ps.ug.edu.pl/*"],
-    "background": {
-      "scripts": ["background.js"]
+  "manifest_version": 2,
+  "name": "WZR Plus",
+  "description": "Uzyskaj wygodny dostęp do wszystkich stron i portali WZR dzięki WZR Plus.",
+  "version": "1.1",
+  "author": "Kajetan Warmbier",
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://wzr.ug.edu.pl/*",
+    "https://mdl.ug.edu.pl/*",
+    "https://ps.ug.edu.pl/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/extensionIcons/wzrPlus16.png",
+      "32": "/images/extensionIcons/wzrPlus32.png",
+      "48": "/images/extensionIcons/wzrPlus48.png",
+      "128": "/images/extensionIcons/wzrPlus128.png"
     },
-    "browser_action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "/images/extensionIcons/wzrPlus16.png",
-            "32": "/images/extensionIcons/wzrPlus32.png",
-            "48": "/images/extensionIcons/wzrPlus48.png",
-            "128": "/images/extensionIcons/wzrPlus128.png"
-          },
-        "default_title": "WZR Plus"
-    },
-    "icons": {
-        "16": "/images/extensionIcons/wzrPlus16.png",
-        "32": "/images/extensionIcons/wzrPlus32.png",
-        "48": "/images/extensionIcons/wzrPlus48.png",
-        "128": "/images/extensionIcons/wzrPlus128.png"
-      },
-    "options_ui": {
-      "page": "options.html"
-    },
-    "applications": {
-      "gecko": {
-        "id": "{18080166-3053-4e06-96a0-e9dc147d28b4}",
-        "update_url": "https://raw.githubusercontent.com/KajetanWarmbier/wzrPlusFirefoxVersion/main/updates.json"
-      }
+    "default_title": "WZR Plus"
+  },
+  "icons": {
+    "16": "/images/extensionIcons/wzrPlus16.png",
+    "32": "/images/extensionIcons/wzrPlus32.png",
+    "48": "/images/extensionIcons/wzrPlus48.png",
+    "128": "/images/extensionIcons/wzrPlus128.png"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "applications": {
+    "gecko": {
+      "id": "{18080166-3053-4e06-96a0-e9dc147d28b4}",
+      "update_url": "https://raw.githubusercontent.com/KajetanWarmbier/wzrPlusFirefoxVersion/main/updates.json"
     }
+  }
 }

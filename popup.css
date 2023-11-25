@@ -1,17 +1,17 @@
 body {
-    background-color: #282828;
-    color: white;
+  background-color: #282828;
+  color: white;
 }
 
 td {
-    padding: 2px;
-    background: transparent;
-    border: 1px solid transparent;
-    cursor: pointer;
+  padding: 2px;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 
 td:hover {
-    background: #414040;
-    border: 1px solid #414040;
-    border-radius: 4px;
+  background: #414040;
+  border: 1px solid #414040;
+  border-radius: 4px;
 }

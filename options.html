@@ -14,24 +14,24 @@
     <div id="container">
         <div id="content">
             <form id="indexValueForm">
-                <label for="studiaRodzaj">Rodzaj studiów: </label>
-                <select id="studiaRodzaj" name="studiaRodzaj">
-                    <option id="selectStudiaRodzaj">Wybierz</option>
-                    <option id="stacjonarne">Stacjonarne</option>
-                    <option id="niestacjonarne">Niestacjonarne</option>
+                <label for="typeOfStudies">Rodzaj studiów: </label>
+                <select id="typeOfStudies" name="typeOfStudies">
+                    <option id="selectTypeOfStudies">Wybierz</option>
+                    <option id="fullTimeStudies">Stacjonarne</option>
+                    <option id="partTimeStudies">Niestacjonarne</option>
                 </select>
 
-                <label for="studiaStopien">Stopień studiów: </label>
-                <select id="studiaStopien" name="studiaStopien">
-                    <option id="selectStudiaStopien">Wybierz</option>
-                    <option id="stopien1">Pierwszy</option>
-                    <option id="stopien2">Drugi</option>
-                    <option id="stopien3">Trzeci</option>
+                <label for="degree">Stopień studiów: </label>
+                <select id="degree" name="degree">
+                    <option id="selectDegree">Wybierz</option>
+                    <option id="firstDegree">Pierwszy</option>
+                    <option id="secondDegree">Drugi</option>
+                    <option id="thirdDegree">Trzeci</option>
                 </select>
 
                 <label for="groupIndex">Grupa: </label>
                 <select id="groupIndex" name="groupIndex">
-                    <!--There goes options.-->
+                    <!--Options-->
                 </select>
 
                 <div id="indexContainer">
@@ -43,7 +43,7 @@
                     <label for="indexValue">Indeks: </label>
                 </div>
 
-                <input type="text" name="indexValue" id="indexValueId">
+                <input type="number" name="indexValue" id="indexValueId">
                 <button id="submitBtn">Zatwierdź</button>
             </form>
         </div>
